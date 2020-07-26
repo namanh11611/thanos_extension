@@ -1,0 +1,8 @@
+body {
+    width: 350px;
+    margin: 20px;
+}
+.row {
+    align-items: baseline;
+    margin-bottom: 5px;
+}
