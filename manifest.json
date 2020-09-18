@@ -1,17 +1,18 @@
 {
-  "name": "Thanos Extensions",
-  "description" : "Base Level Extension",
-  "version": "1.0",
-  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "name": "Thanos Facebook",
+  "description" : "Thanos Extension for Facebook on Chrome browser, cleaning up everything.",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "permissions": ["activeTab", "declarativeContent", "storage", "webRequest", "webRequestBlocking", "*://*.facebook.com/*"],
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": true
   },
   "content_scripts": [
     {
-      "matches": ["http://*.facebook.com/*"],
+      "matches": ["*://*.facebook.com/*"],
       "js": ["contentScript.js"],
-      "run_at": "document_idle"
+      "all_frames": true
     }
   ],
   "page_action": {
@@ -29,15 +30,5 @@
     "48": "images/thanos48.png",
     "128": "images/thanos128.png"
   },
-  "options_page": "options.html",
-  "manifest_version": 2,
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "mac": "MacCtrl+Shift+F"
-      },
-      "description": "Opens hello.html"
-    }
-  }
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
 }

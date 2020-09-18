@@ -5,9 +5,6 @@
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#121212'}, function() {
-    console.log("The color is black.");
-  });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({
@@ -17,3 +14,25 @@ chrome.runtime.onInstalled.addListener(function() {
     }]);
   });
 });
+
+var useragent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36";
+var isOldVersion;
+function rewriteUserAgentHeader(o) {
+  for (var header of o.requestHeaders) {
+    if (isOldVersion && header.name.toLowerCase() === "user-agent") {
+      header.value = useragent;
+    }
+  }
+  return {
+    "requestHeaders": o.requestHeaders
+  };
+}
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  rewriteUserAgentHeader,
+  {urls: ["*://*.facebook.com/*"]},
+  ["blocking", "requestHeaders"]
+);
+
+function changeFacebookVersion(isOld) {
+  isOldVersion = isOld;
+}

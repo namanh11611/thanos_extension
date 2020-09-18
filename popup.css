@@ -1,8 +1,97 @@
 body {
-    width: 350px;
-    margin: 20px;
+    width: 340px;
+    margin: 10px 0;
+    font-size: 14px;
 }
+
 .row {
-    align-items: baseline;
-    margin-bottom: 5px;
+    height: 40px;
+    align-items: center;
+}
+
+.col-4 {
+    text-align: center;
+}
+
+.new-feature {
+    background-color: #F5F5F5;
+}
+
+.title {
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.btn {
+    font-size: 14px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.toggle {
+    text-align: center;
+}
+
+label {
+    margin-bottom: 0;
 }
