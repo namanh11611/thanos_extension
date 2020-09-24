@@ -4,19 +4,15 @@ $(document).ready(function() {
     });
 
     $("#remove-page").click(function(element) {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.executeScript(
-                tabs[0].id,
-                {file: 'remove_invite_page.js'});
-        });
+        executeScriptFeature('remove_invite_page.js');
     });
 
     $("#remove-friend").click(function(element) {
-        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-            chrome.tabs.executeScript(
-                tabs[0].id,
-                {file: 'remove_friend_requests.js'});
-        });
+        executeScriptFeature('remove_friend_requests.js');
+    });
+
+    $("#toggle-chat-height").change(function(element) {
+        executeScriptFeature('increase_chat_height.js');
     });
 
     chrome.storage.sync.get(['fb_version'], function(result) {
@@ -41,11 +37,15 @@ $(document).ready(function() {
         backgroundPage.changeFacebookVersion(isOld);
 
         if (isOld) {
-            chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-                chrome.tabs.executeScript(
-                    tabs[0].id,
-                    {file: 'revert_old_version.js'});
-            });
+            executeScriptFeature('revert_old_version.js');
         }
+    }
+
+    function executeScriptFeature(fileName) {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.executeScript(
+                tabs[0].id,
+                {file: fileName});
+        });
     }
 });
