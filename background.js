@@ -17,6 +17,12 @@ chrome.runtime.onInstalled.addListener(function() {
 
 var useragent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36";
 var isOldVersion = true;
+
+chrome.storage.sync.get(['fb_version'], function(result) {
+  console.log("Get Facebook version: " + result.fb_version);
+  isOldVersion = result.fb_version == 'old';
+});
+
 function rewriteUserAgentHeader(o) {
   for (var header of o.requestHeaders) {
     if (isOldVersion && header.name.toLowerCase() === "user-agent") {
