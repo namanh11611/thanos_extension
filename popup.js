@@ -35,10 +35,6 @@ $(document).ready(function() {
         var browser = browser || chrome;
         var backgroundPage = browser.extension.getBackgroundPage();
         backgroundPage.changeFacebookVersion(isOld);
-
-        if (isOld) {
-            executeScriptFeature('revert_old_version.js');
-        }
     }
 
     function executeScriptFeature(fileName) {

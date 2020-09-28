@@ -10,3 +10,7 @@ window.addEventListener("message", function(event) {
     port.postMessage(event.data.text);
   }
 }, false);
+
+// Remove banner
+var warningBanner = document.querySelector(".fbPageBanner");
+warningBanner.style.display = "none";
