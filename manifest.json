@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.facebook.com/*"],
-      "js": ["contentScript.js"],
+      "js": ["jquery-3.5.1.js", "contentScript.js"],
       "all_frames": true
     }
   ],
