@@ -1,8 +1,24 @@
+// Check Fb updated new version
+var banners = document.getElementsByClassName("fbPageBanner");
+var isHaveBanners = banners && banners.length;
+var isHaveOldBar = document.getElementById("pagelet_bluebar");
+var isFbNotUpdated = isHaveOldBar && !isHaveBanners;
+chrome.storage.sync.set({fb_updated: isFbNotUpdated ? 'no' : 'yes'}, function() {
+  console.log("Check Fb updated: " + (isFbNotUpdated ? 'no' : 'yes'));
+});
+
+
 // Remove banner
 $(".fbPageBanner").css("display", "none");
 
 
-// Remove ads
+// Remove ads new version
+var isHideAdsNew;
+chrome.storage.sync.get(['hide_ads_new_version'], function(result) {
+  console.log("Get hide ads new version value: " + result.hide_ads_new_version);
+  isHideAdsNew = !isHaveOldBar && (result.hide_ads_new_version === 'hide');
+});
+
 var adsDiv = getAdsByLabel();
 var adsLength = 0;
 if (adsDiv.length > 0) {
@@ -13,12 +29,14 @@ if (adsDiv.length > 0) {
 }
 
 $(document).scroll(function() {
-  adsDiv = getAdsByLabel();
-  if (adsDiv.length > adsLength) {
-    for (let i = adsLength; i < adsDiv.length; i++) {
-      findClosestDiv(adsDiv[i]);
+  if (isHideAdsNew) {
+    adsDiv = getAdsByLabel();
+    if (adsDiv.length > adsLength) {
+      for (let i = adsLength; i < adsDiv.length; i++) {
+        findClosestDiv(adsDiv[i]);
+      }
+      adsLength = adsDiv.length;
     }
-    adsLength = adsDiv.length;
   }
 });
 
@@ -36,7 +54,6 @@ function getAdsByLabel() {
 
 function findClosestDiv(label) {
   if (label) {
-    console.log("label", label);
     hideAdsDiv(label.closest("[data-pagelet='FeedUnit_1']"));
     hideAdsDiv(label.closest("[data-pagelet='FeedUnit_{n}']"));
   }
@@ -44,7 +61,6 @@ function findClosestDiv(label) {
 
 function hideAdsDiv(ads) {
   if (ads) {
-    console.log("ads", ads);
     ads.style.display = "none";
   }
 }
