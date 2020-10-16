@@ -15,7 +15,7 @@ chrome.runtime.onInstalled.addListener(function() {
   });
 });
 
-var useragent = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.109 Safari/537.36";
+var useragent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:54.0) Gecko/20100101 Firefox/54.0";
 var isOldVersion = true;
 
 chrome.storage.sync.get(['fb_version'], function(result) {
