@@ -6,7 +6,8 @@ Thanos Extension for Facebook on Chrome browser, cleaning up everything.
 2. Hide ads for new version
 3. Remove all invite page
 4. Remove all friend requests
-5. Increase chat's height
+5. Add friend in a group
+6. Increase chat's height
 
 ## Product
 Link extension: [Thanos Facebook](https://chrome.google.com/webstore/detail/thanos-facebook/ofpgempoafickpaogjehhiomfcpnmmpn)

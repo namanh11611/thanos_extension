@@ -66,6 +66,10 @@ $(document).ready(function() {
         executeScriptFeature('remove_friend_requests.js');
     });
 
+    $("#add-friend").click(function(element) {
+        executeScriptFeature('add_friend_in_group.js');
+    });
+
     $("#toggle-chat-height").change(function(element) {
         executeScriptFeature('increase_chat_height.js');
     });
